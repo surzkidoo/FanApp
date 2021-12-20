@@ -1,0 +1,31 @@
+nav li{
+    display: inline-block;
+    padding: 15px;
+    background-color: rgb(25, 189, 52);
+    color:white;
+    margin-right: 10px;
+    margin-top: 40px;
+    border-radius: 20px;
+}
+nav{
+    margin: auto;
+    width: 600px;
+}
+nav li:hover{
+    background-color: white ;
+    color: rgb(25, 189, 52);
+    border: 1px solid  rgb(25, 189, 52) ;
+  
+}
+.active{
+    background-color: white ;
+    color: rgb(25, 189, 52);
+}
+.show{
+    display: inline-block;
+    padding: 30px;
+    text-align: center;
+   
+    overflow: hidden;
+    margin: auto;
+}

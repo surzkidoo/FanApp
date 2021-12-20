@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://
+cdnjs.cloudflare.com/ajax/libs/font-
+awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://
+maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/
+bootstrap.min.css">
+    <link rel="stylesheet" href="adminpost.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/
+libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/
+ajax/libs/popper.js/1.16.0/umd/
+popper.min.js"></script>
+    <script async="" src="magazine.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/
+bootstrap/4.4.1/js/bootstrap.min.js">
+</script>
+</head>
+
+<body>
+    <style>
+        .profile-image {
+            border-radius: 25px;
+            border: 2px solid red;
+        }
+
+        .s:hover {
+            border: 2px solid red;
+        }
+
+        .likec {
+            color: rgb(19, 80, 194);
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            // when the user clicks on like
+            $('.like').on('click', function () {
+                var postid = $(this).data('id');
+                $post = $(this);
+                var pos = $(this).data('num');
+                $.ajax({
+                    url: 'like.php',
+                    type: 'post',
+                    data: {
+                        'userid': 1,
+                        'postid': 1
+                    },
+                    success: function (response) {
+                        var r = JSON.parse(response);
+                        if (r.type == 1) {
+                            $post.addClass("likec");
+                            $post.children("span").text(r.nums);
+                        } else {
+                            $post.removeClass("likec");
+                            $post.children("span").text(r.nums);
+                        }
+                    }
+                });
+            });
+        });
+        //follow ajax
+
+        $(document).ready(function () {
+            // when the user clicks on like
+            $('.follow').on('click', function () {
+                var postid = $(this).data('id');
+                var follow = $(this);
+
+                $.ajax({
+                    url: 'follow.php',
+                    type: 'post',
+                    data: {
+                        'follower': 1,
+                        'follow': postid
+                    },
+                    success: function (response) {
+
+                        if (response == 1) {
+
+                            follow.html("<span   class='like fa fa fa-user'> Follow</span>");
+                        } else {
+                            follow.html("<span   class='like fa fa fa-user'> UnFollow</span>");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    <div class="container">
+        <span data-id="2" class="like fa fa fa-thumbs-up"> <span></span></span>
+
+        <button data-id="1" class="btn btn-primary follow"> <span class="like fa fa fa-user"> Follow</span></button>
+        <button data-id="2" class="btn btn-primary follow"> <span class="like fa fa fa-user"> Follow</span></button>
+        <button data-id="3" class="btn btn-primary follow"> <span class="like fa fa fa-user"> Follow</span></button>
+    </div>
+</body>

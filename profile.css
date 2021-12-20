@@ -1,0 +1,238 @@
+body{
+    background-color:grey;
+}
+body{
+    font-family: 'Varela Round', sans-serif;
+    
+}
+.form-control {
+    box-shadow: none;
+    border-radius: 4px;
+}
+.form-control:focus {
+    border-color: #f08373;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+.navbar-header.col {
+    padding: 0 !important;
+}	
+.navbar {
+    background: #fff;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-bottom: 1px solid #dfe3e8;
+    border-radius: 0;
+}
+.navbar .navbar-brand, .navbar .navbar-brand:hover, .navbar .navbar-brand:focus {
+    padding-left: 0;
+    font-size: 20px;
+    padding-right: 50px;
+}
+.navbar .navbar-brand b {
+    font-weight: bold;
+    color: #eb5844;		
+}
+.navbar ul.nav li a {
+    color: #888;
+}
+.navbar ul.nav li a:hover, .navbar ul.nav li a:focus {
+    color: #f08373 !important;
+}
+.navbar ul.nav li.active > a, .navbar ul.nav li.open > a {
+    color: #eb5844 !important;
+    background: transparent !important;
+}
+.search-box {
+    width: 100%;
+    position: relative;
+}	
+.search-box input {		
+    border-color: #dfe3e8;        
+    box-shadow: none
+}
+.search-box input, .search-box .btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+.search-box .input-group-btn .btn {
+    border-color: #eb5844;
+    background: #eb5844;
+    outline: none;
+}
+.navbar .nav-item i {
+    font-size: 18px;
+    line-height: 16px;
+}
+.navbar .navbar-right .dropdown-toggle::after {
+    display: none;
+}
+.navbar .dropdown-menu {
+    border-radius: 1px;
+    border-color: #e5e5e5;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+.navbar .dropdown-menu li a {
+    padding: 6px 20px;
+}
+.navbar .navbar-right .dropdown-menu {
+    width: 400px;
+    padding: 20px;
+    left: auto;
+    right: 0;
+    font-size: 14px;
+}
+.hide {
+    display: none !important;
+}
+@media (max-width: 768px){
+    .navbar .navbar-right .dropdown-menu {
+        width: 100%;
+        background: transparent;
+        padding: 10px 20px;
+    }
+    .navbar .input-group {
+        width: 100%;
+    }
+}
+.white{
+    
+    background-color: white;
+    padding: 20px;
+}
+.conc{
+    padding: 5px;
+    border-top:1px solid blue;
+    background-color: rgba(175, 166, 166, 0.066);
+  
+    
+
+}
+.img{
+    height: 100%;
+
+}
+footer{
+    padding-top:20px;
+    background-color: rgb(20, 19, 19);
+}
+.advert div{
+    display: inline-block;
+    width:100%;
+}
+.footer-contact{
+    color: gray;
+}
+.footer-contact a{
+    text-decoration:none;
+    color:inherit;
+}
+.footer-contact a:hover{
+    color:white;
+}
+.footer-contact li{
+    list-style-type:none;
+    padding-bottom: 10px;
+    
+}
+.s{
+    padding: 10px;
+    margin-right:4px;
+    border-radius:10px;
+    background-color:white;
+    color:#28a745;
+}
+.fa-facebook:hover{
+    background-color:rgb(68, 68, 158);
+    color: white;
+}
+.fa-twitter:hover{
+    background-color:lightskyblue;
+    color: white;
+}
+.fa-instagram:hover{
+    background-color:rgb(219, 16, 77);
+    color: white;
+}
+.fa-linkedin:hover{
+    background-color:rgb(11, 235, 235);
+    color: white;
+}
+footer input{
+    margin-bottom:20px;
+    height: 40px;
+    width:100%;
+    outline:none;
+    border:none;
+
+}
+#subscribe{
+    font-weight: bolder;
+}
+.fcontainer{
+    margin:0 40px;
+}
+hr{
+background-color: gray;
+   
+    
+}
+.label{
+    font-size: 25px;
+}
+.postby{
+    font-size: 20px;
+}
+#top{
+   
+    width:50px;
+    color: white;
+    position:relative;
+    top:5px;
+    background-color: rgba(0, 0, 0, 0.781);
+}
+#buttom{
+    margin: auto;
+    padding: 10px;
+    text-align:center;
+   
+    color: white;
+    position:relative;
+    bottom:4px;
+    background-color: rgba(0, 0, 0, 0.781);
+}
+.contact input,select{
+    margin:30px auto;
+    outline: none;
+    border: none;
+    margin-left:20px;
+    width:30%;
+    padding:10px;
+    display: inline-block;
+    box-shadow:0px 0px 5px;
+    border-radius:10px;
+}
+input[type="submit"]{
+    width:15%;
+}
+.scroll div{
+    display: inline-block;
+    width: 160px;
+}
+
+@media only screen and (max-width:768px){
+    
+    
+    .fa-thumbs-up{
+        font-size: 20px;
+    }
+    .fcontainer{
+        margin: 0px;
+    }
+    
+}
+.profile-menu a{
+    margin-bottom:10px;
+    
+  
+    
+}

@@ -1,0 +1,250 @@
+<?php 
+include "config.php";
+session_start();
+if(isset($_SESSION["userid"])){
+
+	$user=$_SESSION["userid"];
+}
+if(isset($_SESSION["username"])){
+
+	$username=$_SESSION["username"];
+}
+if(isset($_SESSION["auth"])){
+$authenticated=$_SESSION["auth"];
+}
+
+$id=$_SESSION["userid"];
+if(isset($_POST["save"])){
+    $facebook=$_POST["facebook"];
+    $twitter=$_POST["twitter"];
+    $mobile=$_POST["mobile"];
+    $website=$_POST["website"];
+    $email=$_POST["email"];
+    
+    $sql="select * from social_media where user_id=$id";
+    
+    $result=$connect->query($sql);
+    if($result->num_rows==0){
+        $sql="insert into social_media(user_id,facebook,twitter,website,email,mobile_number)
+        values($id,'$facebook','$twitter','$website','$email','$mobile')"; 
+        
+        if($connect->query($sql)===TRUE){
+            $message="Inserted Successfully";
+        }
+        else{
+            $message="Failed";
+        }
+    }
+    else{
+        $sql="update social_media SET facebook='$facebook',twitter='$twitter',website='$website',mobile_number='$mobile'where user_id=$id";
+        if($connect->query($sql)===TRUE){
+            $message="updated Successfully";
+        }
+        else{
+            $message="Update Failed";
+        }
+    }
+}?>
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title></title>
+<link rel="stylesheet" href="https://
+cdnjs.cloudflare.com/ajax/libs/font-
+awesome/4.7.0/css/font-awesome.min.css">
+<!-- Latest compiled and minified CSS -->
+<link rel ="stylesheet" href ="https://
+maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/
+bootstrap.min.css">
+<link rel="stylesheet" href="index.css">
+<!-- jQuery library -->
+<script src ="https://ajax.googleapis.com/ajax/
+libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src ="https://cdnjs.cloudflare.com/
+ajax/libs/popper.js/1.16.0/umd/
+popper.min.js"></script>
+<script async="" src="magazine.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src ="https://maxcdn.bootstrapcdn.com/
+bootstrap/4.4.1/js/bootstrap.min.js">
+</script>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-expand-lg  navbar-light">
+	<div class="navbar-header d-flex col">
+		<a class="navbar-brand" href="index.php"><b>Orb</b>vibes</a>  		
+		<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle navbar-toggler ml-auto">
+			<span class="navbar-toggler-icon"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+	</div>
+	<!-- Collection of nav links, forms, and other content for toggling -->
+	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+		<ul class="nav navbar-nav">
+          
+			
+
+			<li class="nav-item dropdown">
+				<a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Artists & Industry<b class="caret"></b></a>
+				<ul class="dropdown-menu">
+                <li><a href="magazine.php" class="dropdown-item">All Magazine section</a></li>
+				<?php 
+				$sql="select * from artist_and_industry";
+				$result=$connect->query($sql);
+				while($row=$result->fetch_assoc()){
+				?>					
+					<li><a href="#" class="dropdown-item"><?php echo$row["name"]?></a></li>
+				<?php }?>
+				</ul>
+			</li>
+
+			
+
+			<li class="nav-item dropdown">
+				<a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Magazine<b class="caret"></b></a>
+				<ul class="dropdown-menu">
+				<?php 
+				$sql="select * from post_type limit 5";
+				$result=$connect->query($sql);
+				while($row=$result->fetch_assoc()){
+				?>					
+					<li><a href="<?php echo $row["name"].".php"?>" class="dropdown-item"><?php echo$row["name"]?></a></li>
+				<?php }?>
+				</ul>
+			</li>
+            <li class="nav-item"><a href="#" class="nav-link">Knowlegde</a></li>
+            
+			
+			<li class="nav-item"><a href="#" class="nav-link">NewsFeed</a></li>			
+			<li class="nav-item dropdown">
+				<a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Music<b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="#" class="dropdown-item">Gospel music</a></li>
+					<li><a href="#" class="dropdown-item">Music Album</a></li>
+					
+					
+				</ul>
+			</li>
+			<li class="nav-item active"><a href="#" class="nav-link"></a></li>
+			<li class="nav-item"><a href="#" class="nav-link">Comedy Videos</a></li>
+			<?php if(isset($authenticated)==true) {?>
+			<li class="nav-item dropdown">
+				<a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#"><span class="fa fa-user-o"> <?php echo $username;?><b class="caret"></b></a>
+				<ul class="dropdown-menu">					
+					<li><a href="artist.php?id=<?php echo $user;?>" class="dropdown-item">My Profile</a></li>
+					<li><a href="#" class="dropdown-item">Get maximum visibility</a></li>
+					<li><a href="profile.php" class="dropdown-item">Account Settings</a></li>
+					<?php if($_SESSION["role_id"]==3) {?>
+						<li><a href="article-dashboard.php" class="dropdown-item">My Articles</a></li>
+					<?php } ?>
+					<li><a href="#" class="dropdown-item">My Gigs</a></li>
+					<li><a href="logout.php" class="dropdown-item">Log out</a></li>
+				</ul>
+			</li>
+			<?php } else{?>
+				<li class="nav-item dropdown">
+				<a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#"><span class="fa fa-lock"> Login<b class="caret"></b></a>
+				<ul class="dropdown-menu">					
+					<li><a href="login.php" class="dropdown-item">Sign in</a></li>
+					<li><a href="register.php" class="dropdown-item">Register</a></li>
+					
+				</ul>
+			</li>
+			<?php }?>
+			
+		</ul>		
+		<ul class="nav navbar-nav navbar-right ml-auto">			
+			<li class="nav-item dropdown">
+				<a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#"><i class="fa fa-search"></i></a>
+				<a data-toggle="dropdown" class="nav-link dropdown-toggle hide" href="#"><i class="fa fa-close"></i></a>
+				<ul class="dropdown-menu">
+					<li>
+                        <form>
+                            <div class="input-group search-box">								
+                                <input type="text" id="search" class="form-control" placeholder="Search here...">
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
+								</span>
+                            </div>
+                        </form>                        
+					</li>
+				</ul>
+			
+	</div>
+</nav>
+    <div class="white fcontainer">
+
+        <div class="container">
+            <p id="title" class="label mb-4">surzkid-profile</p>
+            <div class="menu">
+            <span class="bg-secondary rounded p-1 m-2"><a href="artist.php?id=<?php echo $user;?>" class="text-white  text-decoration-none">View Profile</a></span>
+        
+        <span class="bg-secondary rounded p-1 m-2"><a href="profile.php" class="text-white  text-decoration-none">Account setting</a></span>
+        <span class="bg-secondary rounded p-1 m-2"><a href="payment.html" class="text-white  text-decoration-none">payment</a></span>
+            </div>
+        <div class="row">
+             <div class="col-12 col-md-3 profile-menu pt-4">
+               
+             <a href="profile.php" class="btn btn-primary px-4 d-inline-block mb-2 d-md-block ">Profile Info</a>
+            
+            <a href="music-set.html" class="btn btn-primary px-4 d-inline-block mb-2 d-md-block">Music</a>
+            <a href="video.html" class="btn btn-primary px-4 d-inline-block mb-2 d-md-block">Video</a>
+            <a href="photo.php" class="btn btn-primary px-4 d-inline-block mb-2 d-md-block">Photo</a>
+           
+     
+        <a href="#" class="btn btn-primary px-4 d-inline-block mb-2 d-md-block">Gigs</a>
+        <a href="contact.php" class="btn btn-primary px-4 d-inline-block mb-2 d-md-block active">contact info</a>
+        <?php if($_SESSION["role_id"]==3) {?>
+            <a href="article-dashboard.php" class="btn btn-primary px-4 d-inline-block mb-2 d-md-block ">Article</a>
+            <?php } ?>
+        
+        <a href="email.php" class="btn btn-primary px-4 d-inline-block mb-2 d-md-block ">Email</a>
+        <a href="password.php" class="btn btn-primary px-4 d-inline-block mb-2 d-md-block">password</a>
+            </div>
+            <div class="col-12 col-md-8 mt-sm-2">
+                <form action="<?php $_SERVER["PHP_SELF"] ?>" method="post">
+                <div class="col-12 col-sm-12 col-md-12 mx-auto">
+                <?php if(!empty($message)){
+                     echo "<div class='bg-info mx-auto col-12 col-md-4'>".$message."</div>";
+                 }?>
+                 <?php
+                 $sql="select * from social_media where user_id=$id";
+                 $r=$connect->query($sql);
+                 $con=$r->fetch_assoc();
+                 ?>
+                    <div class="form-group ">
+                        <label for="mobile">mobile number</label>
+                        <input type="text" name="mobile" value="<?php if(isset($con["mobile_number"])){echo$con["mobile_number"];}?>" class="form-control col-md-8 col-12" id="mobile">
+                    </div>
+                    <hr>
+                    <p class="font-weight-bold">Social Networks and website</p>
+                    <div class="form-group ">
+                        <label for="facebook">Facebook link</label>
+                        <input type="text" name="facebook" value="<?php if(isset($con["facebook"])){echo$con["facebook"];}?>"class="form-control col-md-8 col-12" id="facebook">
+                    </div>
+                    <div class="form-group">
+                        <label for="twitter">Twitter link</label>
+                        <input type="text" name="twitter" value="<?php if(isset($con["twitter"])){echo$con["twitter"];}?>" class="form-control col-md-8 col-12" id="twitter">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email link</label>
+                        <input type="text" name="email" value="<?php if(isset($con["email"])){echo$con["email"];}?>" class="form-control col-md-8 col-12" id="twitter">
+                    </div>
+                    <div class="form-group">
+                        <label for="website">Website link</label>
+                        <input type="text" name="website" value="<?php if(isset($con["website"])){echo$con["website"];}?>" class="form-control col-md-8 col-12" id="website">
+                    </div>
+                    <input type="submit"  class="btn btn-sm btn-outline-primary" name="save" value="save">
+                </div>
+        
+            </form>
+        
+    </div>
+    
+    </div>
+</body>
